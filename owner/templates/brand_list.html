@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{%extends 'base.html'%}
+
+{%block body_block%}
+
+<h2 class="text-center">BRANDS</h2>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4"></div>
+    <div class="col-4 mt-3 mb-2">
+        <form action="" method="POST">
+            {%csrf_token%}
+            {{form.as_p}}
+            <input type="submit" value="Search" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Brands</th>
+        <th scope="col">More</th>
+    </tr>
+  </thead>
+  {%if brands%}
+    {%for brand in brands%}
+        <tbody>
+            <th scope="row">{{brand.id}}</th>
+            <td>{{brand.brand_name}}</td>
+            <td>
+                <a href="{%url 'display' brand.id%}" class="btn btn-primary">View</a>
+                <a href="{%url 'update' brand.id%}" class="btn btn-warning ms-5">Update</a>
+                <a href="{%url 'remove' brand.id%}" class="btn btn-danger  ms-5">Delete</a>
+            </td>
+
+    {%endfor%}
+  {%else%}
+    <tr>
+        <td colspan="3" class="text-center">
+            No Brands Avaialable
+        </td>
+    </tr>
+  {%endif%}
+ </tbody>
+</table>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+
+</div>
+{%endblock%}
